@@ -474,18 +474,19 @@ run_openfortivpn (NMFortisslvpnPlugin *plugin, NMSettingVpn *s_vpn, GError **err
 		g_ptr_array_add (argv, (gpointer) g_strdup (value));
 	}
 
-	g_ptr_array_add (argv, (gpointer) g_strdup ("--pppd-plugin"));
-	g_ptr_array_add (argv, (gpointer) g_strdup (NM_FORTISSLVPN_PPPD_PLUGIN));
+//	g_ptr_array_add (argv, (gpointer) g_strdup ("--pppd-plugin"));
+//	g_ptr_array_add (argv, (gpointer) g_strdup (NM_FORTISSLVPN_PPPD_PLUGIN));
 
 	g_ptr_array_add (argv, NULL);
 
 	_LOGD ("start %s", (str_tmp = g_strjoinv (" ", (char **) argv->pdata)));
 
-	if (!g_spawn_async (NULL, (char **) argv->pdata, NULL,
+/*	if (!g_spawn_async (NULL, (char **) argv->pdata, NULL,
 	                    G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid, error)) {
 		g_ptr_array_free (argv, TRUE);
 		return FALSE;
 	}
+*/
 	g_ptr_array_free (argv, TRUE);
 
 	_LOGI ("openfortivpn started with pid %d", pid);
