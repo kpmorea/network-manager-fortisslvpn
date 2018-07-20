@@ -481,12 +481,11 @@ run_openfortivpn (NMFortisslvpnPlugin *plugin, NMSettingVpn *s_vpn, GError **err
 
 	_LOGD ("start %s", (str_tmp = g_strjoinv (" ", (char **) argv->pdata)));
 
-/*	if (!g_spawn_async (NULL, (char **) argv->pdata, NULL,
+	if (!g_spawn_async (NULL, (char **) argv->pdata, NULL,
 	                    G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid, error)) {
 		g_ptr_array_free (argv, TRUE);
 		return FALSE;
 	}
-*/
 	g_ptr_array_free (argv, TRUE);
 
 	_LOGI ("openfortivpn started with pid %d", pid);
@@ -517,8 +516,9 @@ handle_set_state (NMDBusFortisslvpnPpp *object,
                   gpointer user_data)
 {
 	remove_timeout_handler (NM_FORTISSLVPN_PLUGIN (user_data));
-	if (arg_state == NM_PPP_STATUS_DEAD || arg_state == NM_PPP_STATUS_DISCONNECT)
+	/*if (arg_state == NM_PPP_STATUS_DEAD || arg_state == NM_PPP_STATUS_DISCONNECT)
 		nm_vpn_service_plugin_disconnect (NM_VPN_SERVICE_PLUGIN (user_data), NULL);
+		*/
 
 	nmdbus_fortisslvpn_ppp_complete_set_state (object, invocation);
 	return TRUE;
